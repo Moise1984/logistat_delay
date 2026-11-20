@@ -15,7 +15,7 @@ Prédire, au moment où une commande est passée, si elle sera livrée en retard
 | `logistat_propre.csv` | Données complètes nettoyées : 172 765 lignes, 42 colonnes, séparateur `;` |
 | `train.csv` | Jeu d'entraînement (85 %, 146 850 lignes), toutes les colonnes |
 | `test.csv` | Jeu de test (15 %, 25 915 lignes), toutes les colonnes. **Ne pas modifier.** |
-| `logistat.ipynb` | Notebook principal : préparation (étape 1), modèle de référence (étape 2), modèles plus forts (étape 3), validation chronologique (étape 4), évaluation détaillée (étape 5) |
+| `logistat.ipynb` | Notebook principal : préparation (étape 1), modèle de référence (étape 2), modèles plus forts (étape 3), validation chronologique (étape 4), évaluation détaillée (étape 5), réglages (étape 6) |
 | `selection_variables.docx` | Explication du passage de 42 colonnes à 15 variables |
 | `train_prepare.csv`, `test_prepare.csv` | Jeux encodés (108 colonnes + cible), créés quand on exécute le notebook |
 | `train.csv.gz` | Copie compressée de `train.csv` laissée par le transfert. Elle peut être supprimée. |
@@ -115,6 +115,31 @@ Avec 57 % de retards, un modèle qui répond toujours « retard » obtient 57 % 
 - Jusqu'à environ 60 % de rappel, la précision reste proche de 90 %. Au-delà, elle chute vite.
 - Validation chronologique : même conclusion (ROC-AUC 0,782 pour la forêt et LightGBM).
 
+### Étape 6 : réglage des hyperparamètres et du seuil de décision
+
+**Hyperparamètres** (validation regroupée sur train) : une grille pour la forêt et une recherche aléatoire pour LightGBM.
+
+| Modèle | ROC-AUC avant | ROC-AUC après réglage |
+|---|---|---|
+| Forêt aléatoire | 0,771 | 0,771 |
+| LightGBM | 0,770 | 0,770 |
+
+Le réglage ne gagne rien : la limite vient de l'information contenue dans les 15 variables, pas du modèle. **Modèle retenu : LightGBM réglé.**
+
+**Seuil de décision.** Coût = `ratio_cout` × retards manqués + fausses alertes. Le seuil est choisi sur les prédictions hors-pli de train.
+
+| Ratio (coût d'un retard manqué / coût d'une fausse alerte) | Seuil optimal | Rappel retards | Précision retards |
+|---|---|---|---|
+| 1 | 0,61 | 0,59 | 0,89 |
+| 1,5 | 0,59 | 0,59 | 0,89 |
+| 2 | 0,19 | 1,00 | 0,59 |
+| 3 (hypothèse par défaut) | 0,14 | 1,00 | 0,59 |
+| 5 | 0,14 | 1,00 | 0,59 |
+
+- **Bascule vers un ratio de 1,6 :** au-delà, le seuil optimal revient à alerter presque toutes les commandes. Environ 40 % des retards sont indiscernables des commandes à temps avec ces variables.
+- Le ratio est une **hypothèse à remplacer** par les coûts réels (variable `ratio_cout` dans le notebook).
+- Si un retard manqué coûte cher, une stratégie à deux niveaux est préférable : une action forte au-dessus de 0,6 (alertes justes à environ 89 %) et une action légère sur le reste.
+
 ## Exécuter le notebook
 
 1. Ouvrir un terminal dans ce dossier et installer les dépendances :
@@ -125,15 +150,16 @@ Avec 57 % de retards, un modèle qui répond toujours « retard » obtient 57 % 
    ```
    jupyter notebook logistat.ipynb
    ```
-3. Exécuter toutes les cellules (*Run All*). Il faut compter 5 à 10 minutes selon l'ordinateur, surtout à cause de la forêt aléatoire.
+3. Exécuter toutes les cellules (*Run All*). Il faut compter 10 à 20 minutes selon l'ordinateur, dont la moitié pour la recherche d'hyperparamètres. Pour aller plus vite, mettre `FAIRE_RECHERCHE = False` à l'étape 6 : le notebook reprend alors les meilleurs paramètres déjà trouvés (environ 5 minutes).
 
 Le notebook lit `train.csv` et `test.csv` dans le même dossier.
 
 ## Prochaines étapes
 
 1. ~~Modèles plus puissants (forêt aléatoire, gradient boosting)~~ : fait (étape 3)
-2. **Ajustement du seuil de décision** pour améliorer le rappel des retards
-3. **Réglage des hyperparamètres** du meilleur modèle, toujours sur train
+2. ~~Ajustement du seuil de décision~~ : fait (étape 6)
+3. ~~Réglage des hyperparamètres~~ : fait (étape 6)
 4. ~~Validation sans tricher (regroupée + chronologique)~~ : fait (étape 4)
 5. ~~Évaluation avec F1, rappel, ROC-AUC~~ : fait (étape 5)
-6. **Évaluation finale, une seule fois, sur le jeu de test**
+6. **Évaluation finale, une seule fois, sur le jeu de test** (LightGBM réglé et seuil choisi)
+7. Piste d'amélioration : ajouter des variables connues à la commande (distance, charge de l'entrepôt…)
