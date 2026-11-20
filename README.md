@@ -15,7 +15,7 @@ Prédire, au moment où une commande est passée, si elle sera livrée en retard
 | `logistat_propre.csv` | Données complètes nettoyées : 172 765 lignes, 42 colonnes, séparateur `;` |
 | `train.csv` | Jeu d'entraînement (85 %, 146 850 lignes), toutes les colonnes |
 | `test.csv` | Jeu de test (15 %, 25 915 lignes), toutes les colonnes. **Ne pas modifier.** |
-| `logistat.ipynb` | Notebook principal : préparation (étape 1), modèle de référence (étape 2), modèles plus forts (étape 3), validation chronologique (étape 4) |
+| `logistat.ipynb` | Notebook principal : préparation (étape 1), modèle de référence (étape 2), modèles plus forts (étape 3), validation chronologique (étape 4), évaluation détaillée (étape 5) |
 | `selection_variables.docx` | Explication du passage de 42 colonnes à 15 variables |
 | `train_prepare.csv`, `test_prepare.csv` | Jeux encodés (108 colonnes + cible), créés quand on exécute le notebook |
 | `train.csv.gz` | Copie compressée de `train.csv` laissée par le transfert. Elle peut être supprimée. |
@@ -100,6 +100,21 @@ Deux validations, toutes deux sur train seulement :
 - Le constat vaut aussi pour la période d'octobre 2017 à janvier 2018, où le volume est réduit (environ 1 800 lignes par mois contre 4 300) et le catalogue passe à 8 à 20 produits.
 - Le taux de retard reste stable (environ 57 %) sur toute la période.
 
+### Étape 5 : évaluer avec les bonnes métriques
+
+Avec 57 % de retards, un modèle qui répond toujours « retard » obtient 57 % d'exactitude et un rappel de 100 %, sans rien apprendre. On évalue donc avec le **ROC-AUC**, le **rappel** et la **précision sur les retards**, et le **F1**, à partir de prédictions honnêtes : hors-pli en validation regroupée, et sur les mois récents en validation chronologique. Le notebook contient aussi les matrices de confusion et les courbes ROC et précision-rappel.
+
+| Modèle (CV regroupée, seuil 0,5) | Exactitude | Précision retards | Rappel retards | F1 | ROC-AUC |
+|---|---|---|---|---|---|
+| Forêt aléatoire | 0,721 | 0,884 | 0,591 | 0,708 | **0,771** |
+| LightGBM | 0,714 | 0,849 | **0,608** | **0,709** | 0,770 |
+| Régression logistique | 0,713 | 0,889 | 0,569 | 0,694 | 0,743 |
+| Naïf | 0,573 | 0,573 | 1,000 | 0,728 | 0,500 |
+
+- Les alertes sont **fiables** (précision de 85 à 89 %), mais environ **40 % des retards sont manqués** au seuil 0,5.
+- Jusqu'à environ 60 % de rappel, la précision reste proche de 90 %. Au-delà, elle chute vite.
+- Validation chronologique : même conclusion (ROC-AUC 0,782 pour la forêt et LightGBM).
+
 ## Exécuter le notebook
 
 1. Ouvrir un terminal dans ce dossier et installer les dépendances :
@@ -110,7 +125,7 @@ Deux validations, toutes deux sur train seulement :
    ```
    jupyter notebook logistat.ipynb
    ```
-3. Exécuter toutes les cellules (*Run All*). Il faut compter quelques minutes, surtout pour la forêt aléatoire.
+3. Exécuter toutes les cellules (*Run All*). Il faut compter 5 à 10 minutes selon l'ordinateur, surtout à cause de la forêt aléatoire.
 
 Le notebook lit `train.csv` et `test.csv` dans le même dossier.
 
@@ -120,4 +135,5 @@ Le notebook lit `train.csv` et `test.csv` dans le même dossier.
 2. **Ajustement du seuil de décision** pour améliorer le rappel des retards
 3. **Réglage des hyperparamètres** du meilleur modèle, toujours sur train
 4. ~~Validation sans tricher (regroupée + chronologique)~~ : fait (étape 4)
-5. **Évaluation finale, une seule fois, sur le jeu de test**
+5. ~~Évaluation avec F1, rappel, ROC-AUC~~ : fait (étape 5)
+6. **Évaluation finale, une seule fois, sur le jeu de test**
