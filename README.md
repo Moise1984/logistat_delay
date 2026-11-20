@@ -15,7 +15,7 @@ Prédire, au moment où une commande est passée, si elle sera livrée en retard
 | `logistat_propre.csv` | Données complètes nettoyées : 172 765 lignes, 42 colonnes, séparateur `;` |
 | `train.csv` | Jeu d'entraînement (85 %, 146 850 lignes), toutes les colonnes |
 | `test.csv` | Jeu de test (15 %, 25 915 lignes), toutes les colonnes. **Ne pas modifier.** |
-| `logistat.ipynb` | Notebook principal : préparation (étape 1) et modèle de référence (étape 2) |
+| `logistat.ipynb` | Notebook principal : préparation (étape 1), modèle de référence (étape 2), modèles plus forts (étape 3) |
 | `selection_variables.docx` | Explication du passage de 42 colonnes à 15 variables |
 | `train_prepare.csv`, `test_prepare.csv` | Jeux encodés (108 colonnes + cible), créés quand on exécute le notebook |
 | `train.csv.gz` | Copie compressée de `train.csv` laissée par le transfert. Elle peut être supprimée. |
@@ -69,23 +69,38 @@ Le détail est dans `selection_variables.docx`.
 
 **Score de référence à battre : ROC-AUC 0,744.** Le mode d'expédition est le facteur dominant : *First Class* augmente fortement le risque de retard, *Same Day* et *Standard Class* le réduisent.
 
+### Étape 3 : modèles plus forts
+
+Même protocole (5 plis regroupés par commande, sur train seulement) :
+
+| Modèle | ROC-AUC | Exactitude | F1 | Rappel retards | Précision retards |
+|---|---|---|---|---|---|
+| Forêt aléatoire (300 arbres) | **0,771** | **0,721** | 0,708 | 0,591 | 0,884 |
+| LightGBM (500 arbres) | 0,770 | 0,714 | **0,709** | **0,608** | 0,849 |
+| Régression logistique (référence) | 0,744 | 0,713 | 0,694 | 0,569 | 0,889 |
+| Naïf | 0,500 | 0,573 | 0,728 | 1,000 | 0,573 |
+
+- Les deux modèles à arbres battent la référence (ROC-AUC +0,027) et sont à égalité entre eux.
+- Variables les plus importantes : délai promis, heure de commande, mode d'expédition.
+- Le rappel reste autour de 60 % : c'est le point à améliorer.
+
 ## Exécuter le notebook
 
 1. Ouvrir un terminal dans ce dossier et installer les dépendances :
    ```
-   pip install pandas numpy scikit-learn matplotlib jupyter
+   pip install pandas numpy scikit-learn lightgbm matplotlib jupyter
    ```
 2. Lancer Jupyter et ouvrir `logistat.ipynb` :
    ```
    jupyter notebook logistat.ipynb
    ```
-3. Exécuter toutes les cellules (*Run All*). Il faut compter environ une minute.
+3. Exécuter toutes les cellules (*Run All*). Il faut compter quelques minutes, surtout pour la forêt aléatoire.
 
 Le notebook lit `train.csv` et `test.csv` dans le même dossier.
 
 ## Prochaines étapes
 
-1. **Modèles plus puissants** (forêt aléatoire, gradient boosting), évalués avec la même validation croisée
+1. ~~Modèles plus puissants (forêt aléatoire, gradient boosting)~~ : fait (étape 3)
 2. **Ajustement du seuil de décision** pour améliorer le rappel des retards
 3. **Réglage des hyperparamètres** du meilleur modèle, toujours sur train
 4. **Évaluation finale, une seule fois, sur le jeu de test**
