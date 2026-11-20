@@ -15,7 +15,7 @@ Prédire, au moment où une commande est passée, si elle sera livrée en retard
 | `logistat_propre.csv` | Données complètes nettoyées : 172 765 lignes, 42 colonnes, séparateur `;` |
 | `train.csv` | Jeu d'entraînement (85 %, 146 850 lignes), toutes les colonnes |
 | `test.csv` | Jeu de test (15 %, 25 915 lignes), toutes les colonnes. **Ne pas modifier.** |
-| `logistat.ipynb` | Notebook principal : préparation (étape 1), modèle de référence (étape 2), modèles plus forts (étape 3), validation chronologique (étape 4), évaluation détaillée (étape 5), réglages (étape 6) |
+| `logistat.ipynb` | Notebook principal : préparation (étape 1), modèle de référence (étape 2), modèles plus forts (étape 3), validation chronologique (étape 4), évaluation détaillée (étape 5), réglages (étape 6), interprétation (étape 7) |
 | `selection_variables.docx` | Explication du passage de 42 colonnes à 15 variables |
 | `train_prepare.csv`, `test_prepare.csv` | Jeux encodés (108 colonnes + cible), créés quand on exécute le notebook |
 | `train.csv.gz` | Copie compressée de `train.csv` laissée par le transfert. Elle peut être supprimée. |
@@ -140,11 +140,33 @@ Le réglage ne gagne rien : la limite vient de l'information contenue dans les 1
 - Le ratio est une **hypothèse à remplacer** par les coûts réels (variable `ratio_cout` dans le notebook).
 - Si un retard manqué coûte cher, une stratégie à deux niveaux est préférable : une action forte au-dessus de 0,6 (alertes justes à environ 89 %) et une action légère sur le reste.
 
+### Étape 7 : interpréter le modèle
+
+On utilise l'importance par permutation (sur les 15 variables d'origine) et SHAP (vue d'ensemble, effets des variables clés, 3 exemples individuels). Les calculs portent sur le LightGBM entraîné jusqu'en juin 2017 et expliqué sur les mois récents de train.
+
+| Variable | Perte de ROC-AUC si mélangée |
+|---|---|
+| `Shipping Mode` | 0,104 |
+| `Days for shipment (scheduled)` | 0,059 |
+| `order_hour` | 0,052 |
+| Les 12 autres | 0,003 ou moins |
+
+**Le modèle est logique.** Il a retrouvé des règles qui ont un sens métier :
+
+| Mode | Délai promis | Taux de retard |
+|---|---|---|
+| First Class | 1 jour | 100 % (l'expédition réelle prend toujours 2 jours) |
+| Same Day | 0 jour | 0 % avant midi, 100 % après midi (heure limite) |
+| Second Class | 2 jours | environ 80 % |
+| Standard Class | 4 jours | environ 40 % |
+
+Pour Second Class et Standard Class (79 % des commandes), la durée réelle varie de 2 à 6 jours sans lien avec les variables disponibles. C'est ce qui explique le plafond du ROC-AUC (environ 0,77).
+
 ## Exécuter le notebook
 
 1. Ouvrir un terminal dans ce dossier et installer les dépendances :
    ```
-   pip install pandas numpy scikit-learn lightgbm matplotlib jupyter
+   pip install pandas numpy scikit-learn lightgbm shap matplotlib jupyter
    ```
 2. Lancer Jupyter et ouvrir `logistat.ipynb` :
    ```
@@ -162,4 +184,5 @@ Le notebook lit `train.csv` et `test.csv` dans le même dossier.
 4. ~~Validation sans tricher (regroupée + chronologique)~~ : fait (étape 4)
 5. ~~Évaluation avec F1, rappel, ROC-AUC~~ : fait (étape 5)
 6. **Évaluation finale, une seule fois, sur le jeu de test** (LightGBM réglé et seuil choisi)
-7. Piste d'amélioration : ajouter des variables connues à la commande (distance, charge de l'entrepôt…)
+7. ~~Interprétation (permutation, SHAP)~~ : fait (étape 7)
+8. Piste d'amélioration : ajouter des informations sur l'expédition (transporteur, entrepôt, distance, charge), seules capables de prévoir les retards Second et Standard Class
