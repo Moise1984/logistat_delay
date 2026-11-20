@@ -15,7 +15,10 @@ Prédire, au moment où une commande est passée, si elle sera livrée en retard
 | `logistat_propre.csv` | Données complètes nettoyées : 172 765 lignes, 42 colonnes, séparateur `;` |
 | `train.csv` | Jeu d'entraînement (85 %, 146 850 lignes), toutes les colonnes |
 | `test.csv` | Jeu de test (15 %, 25 915 lignes), toutes les colonnes. **Ne pas modifier.** |
-| `logistat.ipynb` | Notebook principal : préparation (étape 1), modèle de référence (étape 2), modèles plus forts (étape 3), validation chronologique (étape 4), évaluation détaillée (étape 5), réglages (étape 6), interprétation (étape 7) |
+| `logistat.ipynb` | Notebook principal : préparation (étape 1), modèle de référence (étape 2), modèles plus forts (étape 3), validation chronologique (étape 4), évaluation détaillée (étape 5), réglages (étape 6), interprétation (étape 7), modèle final et export (étape 8) |
+| `modele_retard.joblib` | **Modèle final à remettre à l'application** : encodage + LightGBM + seuil (créé à l'étape 8) |
+| `modele_retard_info.json` | Fiche du modèle : entrées attendues, catégories connues, seuil, performance, versions |
+| `predire.py` | Script de prédiction prêt à l'emploi pour l'application |
 | `selection_variables.docx` | Explication du passage de 42 colonnes à 15 variables |
 | `train_prepare.csv`, `test_prepare.csv` | Jeux encodés (108 colonnes + cible), créés quand on exécute le notebook |
 | `train.csv.gz` | Copie compressée de `train.csv` laissée par le transfert. Elle peut être supprimée. |
@@ -162,11 +165,57 @@ On utilise l'importance par permutation (sur les 15 variables d'origine) et SHAP
 
 Pour Second Class et Standard Class (79 % des commandes), la durée réelle varie de 2 à 6 jours sans lien avec les variables disponibles. C'est ce qui explique le plafond du ROC-AUC (environ 0,77).
 
+### Étape 8 : modèle final, test et export
+
+**Choix du ratio de coût = 1** (coût d'un retard manqué / coût d'une fausse alerte) :
+- c'est une **décision métier**, que les données ne peuvent pas fixer ;
+- 1 est le choix **neutre** (les deux erreurs pèsent autant), d'où un **seuil de 0,61** ;
+- de 1 à 1,5, le modèle trie utilement les commandes. **À partir de 1,6, il alerte presque tout** et ne sert presque plus ;
+- pour changer : modifier `ratio_final` à l'étape 8 et réexécuter. Le nouveau seuil est enregistré dans le modèle.
+
+**Évaluation unique sur le test** (LightGBM réentraîné sur tout train, seuil 0,61) :
+
+| | Exactitude | Précision retards | Rappel retards | F1 | ROC-AUC |
+|---|---|---|---|---|---|
+| Attendu (validation sur train) | 0,722 | 0,891 | 0,586 | 0,707 | 0,770 |
+| Test (25 915 lignes) | 0,723 | 0,897 | 0,584 | 0,707 | 0,805* |
+
+\* ROC-AUC optimiste : 87 % des lignes du test appartiennent à une commande dont d'autres articles sont dans train. Sur les commandes vraiment nouvelles, il vaut 0,764. **Performance à annoncer : ROC-AUC d'environ 0,77, précision d'environ 0,89 et rappel d'environ 0,58 au seuil de 0,61.**
+
+## Utilisation du modèle dans l'application
+
+Fichiers à remettre : `modele_retard.joblib`, `modele_retard_info.json`, `predire.py`.
+
+```
+pip install pandas scikit-learn lightgbm joblib
+```
+
+```python
+from predire import ModeleRetard
+
+modele = ModeleRetard('modele_retard.joblib')
+modele.predire({
+    'Type': 'DEBIT', 'Shipping Mode': 'Same Day', 'Customer Segment': 'Consumer',
+    'Category Name': 'Cleats', 'Department Name': 'Apparel', 'Market': 'LATAM',
+    'Order Region': 'Central America', 'Days for shipment (scheduled)': 0,
+    'Order Item Product Price': 59.99, 'Order Item Quantity': 2,
+    'Order Item Discount Rate': 0.05, 'Order Item Profit Ratio': 0.25,
+    'order_month': 11, 'order_weekday': 2, 'order_hour': 15,
+})
+#    probabilite_retard  retard_prevu
+# 0               0.996             1
+```
+
+- **Entrées :** les 15 variables brutes d'une ligne de commande, avec les noms exacts ci-dessus (types et catégories connues dans `modele_retard_info.json`). `order_weekday` : 0 = lundi.
+- **Sortie :** `probabilite_retard` (0 à 1) et `retard_prevu` (1 si probabilité ≥ seuil).
+- Une catégorie inconnue ne provoque pas d'erreur : elle est ignorée par l'encodage.
+- Utiliser les **mêmes versions** de scikit-learn et LightGBM que l'entraînement (voir `versions` dans le fichier info).
+
 ## Exécuter le notebook
 
 1. Ouvrir un terminal dans ce dossier et installer les dépendances :
    ```
-   pip install pandas numpy scikit-learn lightgbm shap matplotlib jupyter
+   pip install pandas numpy scikit-learn lightgbm shap matplotlib jupyter joblib
    ```
 2. Lancer Jupyter et ouvrir `logistat.ipynb` :
    ```
@@ -178,11 +227,7 @@ Le notebook lit `train.csv` et `test.csv` dans le même dossier.
 
 ## Prochaines étapes
 
-1. ~~Modèles plus puissants (forêt aléatoire, gradient boosting)~~ : fait (étape 3)
-2. ~~Ajustement du seuil de décision~~ : fait (étape 6)
-3. ~~Réglage des hyperparamètres~~ : fait (étape 6)
-4. ~~Validation sans tricher (regroupée + chronologique)~~ : fait (étape 4)
-5. ~~Évaluation avec F1, rappel, ROC-AUC~~ : fait (étape 5)
-6. **Évaluation finale, une seule fois, sur le jeu de test** (LightGBM réglé et seuil choisi)
-7. ~~Interprétation (permutation, SHAP)~~ : fait (étape 7)
-8. Piste d'amélioration : ajouter des informations sur l'expédition (transporteur, entrepôt, distance, charge), seules capables de prévoir les retards Second et Standard Class
+Toutes les étapes prévues sont faites (1 à 8). Pistes pour la suite :
+1. **Fixer le vrai ratio de coût** avec les responsables logistiques, puis réexécuter l'étape 8.
+2. **Ajouter des informations sur l'expédition** (transporteur, entrepôt, distance, charge). Ce sont les seules capables de prévoir les retards Second et Standard Class.
+3. **Réentraîner régulièrement** le modèle sur les commandes récentes.

@@ -1,0 +1,199 @@
+{
+  "description": "Prédiction du risque de retard de livraison (Late_delivery_risk) au moment de la commande",
+  "sortie": {
+    "probabilite_retard": "entre 0 et 1",
+    "retard_prevu": "1 si probabilite_retard >= 0.61, sinon 0"
+  },
+  "seuil": 0.61,
+  "ratio_cout": 1,
+  "entrees": {
+    "Type": {
+      "type": "texte",
+      "valeurs_connues": [
+        "CASH",
+        "DEBIT",
+        "PAYMENT",
+        "TRANSFER"
+      ]
+    },
+    "Shipping Mode": {
+      "type": "texte",
+      "valeurs_connues": [
+        "First Class",
+        "Same Day",
+        "Second Class",
+        "Standard Class"
+      ]
+    },
+    "Customer Segment": {
+      "type": "texte",
+      "valeurs_connues": [
+        "Consumer",
+        "Corporate",
+        "Home Office"
+      ]
+    },
+    "Category Name": {
+      "type": "texte",
+      "valeurs_connues": [
+        "Accessories",
+        "As Seen on TV!",
+        "Baby",
+        "Baseball & Softball",
+        "Basketball",
+        "Books",
+        "Boxing & MMA",
+        "CDs",
+        "Cameras",
+        "Camping & Hiking",
+        "Cardio Equipment",
+        "Children's Clothing",
+        "Cleats",
+        "Computers",
+        "Consumer Electronics",
+        "Crafts",
+        "DVDs",
+        "Electronics",
+        "Fishing",
+        "Fitness Accessories",
+        "Garden",
+        "Girls' Apparel",
+        "Golf Apparel",
+        "Golf Bags & Carts",
+        "Golf Balls",
+        "Golf Gloves",
+        "Golf Shoes",
+        "Health and Beauty",
+        "Hockey",
+        "Hunting & Shooting",
+        "Indoor/Outdoor Games",
+        "Kids' Golf Clubs",
+        "Lacrosse",
+        "Men's Clothing",
+        "Men's Footwear",
+        "Men's Golf Clubs",
+        "Music",
+        "Pet Supplies",
+        "Shop By Sport",
+        "Soccer",
+        "Sporting Goods",
+        "Strength Training",
+        "Tennis & Racquet",
+        "Toys",
+        "Trade-In",
+        "Video Games",
+        "Water Sports",
+        "Women's Apparel",
+        "Women's Clothing",
+        "Women's Golf Clubs"
+      ]
+    },
+    "Department Name": {
+      "type": "texte",
+      "valeurs_connues": [
+        "Apparel",
+        "Book Shop",
+        "Discs Shop",
+        "Fan Shop",
+        "Fitness",
+        "Footwear",
+        "Golf",
+        "Health and Beauty",
+        "Outdoors",
+        "Pet Shop",
+        "Technology"
+      ]
+    },
+    "Market": {
+      "type": "texte",
+      "valeurs_connues": [
+        "Africa",
+        "Europe",
+        "LATAM",
+        "Pacific Asia",
+        "USCA"
+      ]
+    },
+    "Order Region": {
+      "type": "texte",
+      "valeurs_connues": [
+        "Canada",
+        "Caribbean",
+        "Central Africa",
+        "Central America",
+        "Central Asia",
+        "East Africa",
+        "East of USA",
+        "Eastern Asia",
+        "Eastern Europe",
+        "North Africa",
+        "Northern Europe",
+        "Oceania",
+        "South America",
+        "South Asia",
+        "South of USA",
+        "Southeast Asia",
+        "Southern Africa",
+        "Southern Europe",
+        "US Center",
+        "West Africa",
+        "West Asia",
+        "West of USA",
+        "Western Europe"
+      ]
+    },
+    "Days for shipment (scheduled)": {
+      "type": "nombre",
+      "min_vu": 0.0,
+      "max_vu": 4.0
+    },
+    "Order Item Product Price": {
+      "type": "nombre",
+      "min_vu": 9.99,
+      "max_vu": 1999.99
+    },
+    "Order Item Quantity": {
+      "type": "nombre",
+      "min_vu": 1.0,
+      "max_vu": 5.0
+    },
+    "Order Item Discount Rate": {
+      "type": "nombre",
+      "min_vu": 0.0,
+      "max_vu": 0.25
+    },
+    "Order Item Profit Ratio": {
+      "type": "nombre",
+      "min_vu": -2.75,
+      "max_vu": 0.5
+    },
+    "order_month": {
+      "type": "nombre",
+      "min_vu": 1.0,
+      "max_vu": 12.0
+    },
+    "order_weekday": {
+      "type": "nombre",
+      "min_vu": 0.0,
+      "max_vu": 6.0
+    },
+    "order_hour": {
+      "type": "nombre",
+      "min_vu": 0.0,
+      "max_vu": 23.0
+    }
+  },
+  "performance_test": {
+    "exactitude": 0.723,
+    "precision_retard": 0.897,
+    "rappel_retard": 0.584,
+    "f1": 0.707,
+    "roc_auc": 0.805
+  },
+  "versions": {
+    "python": "3.13.18",
+    "scikit-learn": "1.9.1",
+    "lightgbm": "4.7.0",
+    "pandas": "3.1.1"
+  }
+}
