@@ -15,7 +15,7 @@ Prédire, au moment où une commande est passée, si elle sera livrée en retard
 | `logistat_propre.csv` | Données complètes nettoyées : 172 765 lignes, 42 colonnes, séparateur `;` |
 | `train.csv` | Jeu d'entraînement (85 %, 146 850 lignes), toutes les colonnes |
 | `test.csv` | Jeu de test (15 %, 25 915 lignes), toutes les colonnes. **Ne pas modifier.** |
-| `logistat.ipynb` | Notebook principal : préparation (étape 1), modèle de référence (étape 2), modèles plus forts (étape 3) |
+| `logistat.ipynb` | Notebook principal : préparation (étape 1), modèle de référence (étape 2), modèles plus forts (étape 3), validation chronologique (étape 4) |
 | `selection_variables.docx` | Explication du passage de 42 colonnes à 15 variables |
 | `train_prepare.csv`, `test_prepare.csv` | Jeux encodés (108 colonnes + cible), créés quand on exécute le notebook |
 | `train.csv.gz` | Copie compressée de `train.csv` laissée par le transfert. Elle peut être supprimée. |
@@ -84,6 +84,22 @@ Même protocole (5 plis regroupés par commande, sur train seulement) :
 - Variables les plus importantes : délai promis, heure de commande, mode d'expédition.
 - Le rappel reste autour de 60 % : c'est le point à améliorer.
 
+### Étape 4 : valider sans tricher
+
+Deux validations, toutes deux sur train seulement :
+1. **Validation croisée regroupée par commande** (étapes 2 et 3) : les articles d'une même commande ne sont jamais séparés.
+2. **Validation chronologique** : apprentissage sur les commandes jusqu'au 30 juin 2017, validation sur juillet 2017 à janvier 2018 (13,5 % de train). On simule ainsi la prédiction de commandes futures.
+
+| Modèle (ROC-AUC) | CV regroupée | Juil. 2017 - janv. 2018 | Juil. - sept. 2017 | Oct. 2017 - janv. 2018 |
+|---|---|---|---|---|
+| Forêt aléatoire | 0,771 | **0,782** | 0,780 | 0,786 |
+| LightGBM | 0,770 | **0,782** | 0,781 | 0,784 |
+| Régression logistique | 0,744 | 0,755 | 0,757 | 0,755 |
+
+- Les scores ne baissent pas sur les mois récents : **pas de fuite**, et les modèles **tiennent dans le temps**.
+- Le constat vaut aussi pour la période d'octobre 2017 à janvier 2018, où le volume est réduit (environ 1 800 lignes par mois contre 4 300) et le catalogue passe à 8 à 20 produits.
+- Le taux de retard reste stable (environ 57 %) sur toute la période.
+
 ## Exécuter le notebook
 
 1. Ouvrir un terminal dans ce dossier et installer les dépendances :
@@ -103,5 +119,5 @@ Le notebook lit `train.csv` et `test.csv` dans le même dossier.
 1. ~~Modèles plus puissants (forêt aléatoire, gradient boosting)~~ : fait (étape 3)
 2. **Ajustement du seuil de décision** pour améliorer le rappel des retards
 3. **Réglage des hyperparamètres** du meilleur modèle, toujours sur train
-4. **Évaluation finale, une seule fois, sur le jeu de test**
-5. Optionnel : validation chronologique (les commandes vont de janvier 2015 à janvier 2018) pour vérifier la tenue du modèle dans le temps
+4. ~~Validation sans tricher (regroupée + chronologique)~~ : fait (étape 4)
+5. **Évaluation finale, une seule fois, sur le jeu de test**
