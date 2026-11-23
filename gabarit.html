@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LogiStat</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📦</text></svg>">
+<style>
+:root{--marine:#12355B;--orange:#E8833A;--ambre:#F29E4C;--retard:#D64550;--atemps:#1B998B;
+--fond:#F6F8FB;--fond2:#E9EFF6;--texte:#1C2B39;--doux:#5B6B7B;--bord:#D9E2EC}
+*{box-sizing:border-box}
+body{margin:0;background:var(--fond);color:var(--texte);font:20px/1.5 "Segoe UI",system-ui,sans-serif}
+.app{display:grid;grid-template-columns:300px minmax(0,1fr);min-height:100vh}
+aside{background:var(--fond2);padding:28px 22px;display:flex;flex-direction:column;gap:16px}
+aside h2{font-size:1.3rem;margin:0}
+aside .note{color:var(--doux);font-size:.9rem}
+main{padding:28px clamp(16px,4vw,48px);max-width:1250px;width:100%}
+.bandeau{background:linear-gradient(120deg,var(--marine),#1F5A8E);color:#fff;border-radius:18px;padding:22px 30px;display:flex;align-items:center;gap:20px}
+.bandeau .ic{font-size:3.2rem}.bandeau h1{margin:0;font-size:2.6rem;line-height:1.1}.bandeau p{margin:4px 0 0;font-size:1.2rem;opacity:.9}
+.onglets{display:flex;gap:6px;border-bottom:2px solid var(--bord);margin:24px 0 18px;overflow-x:auto}
+.onglets button{background:none;border:0;border-bottom:4px solid transparent;margin-bottom:-2px;padding:12px 16px;font:inherit;font-size:1.25rem;font-weight:600;color:var(--texte);cursor:pointer;white-space:nowrap}
+.onglets button[aria-selected=true]{color:var(--orange);border-color:var(--orange)}
+section[hidden]{display:none}
+.btn{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--bord);background:#fff;color:var(--texte);border-radius:12px;padding:10px 16px;font:inherit;font-size:1rem;cursor:pointer}
+.btn:hover{border-color:var(--orange);color:var(--orange)}
+.btn.primaire{background:var(--orange);border-color:var(--orange);color:#fff;font-weight:700;font-size:1.3rem;width:100%;justify-content:center;padding:15px}
+.btn.primaire:hover{filter:brightness(1.05);color:#fff}
+.formulaire{background:#fff;border:1px solid var(--bord);border-radius:16px;padding:22px;display:grid;gap:18px}
+.grille2{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.grille3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+label.champ{display:flex;flex-direction:column;gap:6px;font-weight:600}
+input,select{font:inherit;font-size:1.1rem;padding:11px 13px;border:1px solid var(--bord);border-radius:10px;background:var(--fond);color:var(--texte);width:100%}
+input:focus,select:focus{outline:2px solid #2A78D6;outline-offset:0}
+.info{background:#E3EEFB;color:#13426F;border-radius:12px;padding:15px 18px;margin:14px 0}
+.alerte{background:#FDEBD8;color:#7A4511;border-radius:12px;padding:15px 18px;margin:14px 0;font-size:1rem}
+.erreur{background:#FBE3E5;color:#8A1F2A;border-radius:12px;padding:15px 18px;margin:14px 0}
+.cartes{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin:4px 0 20px}
+.carte{background:#fff;border-radius:16px;padding:18px 22px;border-top:6px solid var(--c);box-shadow:0 2px 10px rgba(18,53,91,.07)}
+.carte .lib{text-transform:uppercase;letter-spacing:.06em;font-size:.85rem;color:var(--doux);font-weight:700}
+.carte .val{font-size:2.6rem;font-weight:800;color:var(--c);line-height:1.15;margin:4px 0}
+.carte .nt{color:var(--doux);font-size:.95rem}
+.resultat{display:grid;grid-template-columns:2fr 3fr;gap:28px;margin-top:24px}
+.verdict{border-radius:18px;color:#fff;padding:24px;text-align:center}
+.verdict .t{font-size:1.4rem;font-weight:700}.verdict .g{font-size:4.4rem;font-weight:800;line-height:1.05}
+.verdict .x{font-size:1.25rem}
+.verdict .d{margin-top:12px;background:rgba(255,255,255,.18);border-radius:10px;padding:9px;font-size:1.25rem}
+h4{font-size:1.45rem;margin:4px 0 14px}
+.facteur{display:flex;align-items:center;gap:14px;background:#fff;border-radius:14px;padding:14px 18px;margin-bottom:12px;box-shadow:0 1px 6px rgba(18,53,91,.07)}
+.facteur .rang{width:40px;height:40px;border-radius:50%;color:#fff;display:grid;place-items:center;font-weight:800;flex:none;font-size:1.15rem}
+.facteur .nom{font-weight:700;font-size:1.25rem}.facteur .vl{color:var(--doux)}
+.facteur .ef{margin-left:auto;font-weight:800;font-size:1.4rem;white-space:nowrap}
+details{background:#fff;border:1px solid var(--bord);border-radius:14px;padding:14px 18px;margin-top:16px}
+summary{cursor:pointer;font-weight:600}
+.barres{display:grid;gap:9px;margin-top:12px}
+.barre{display:grid;grid-template-columns:minmax(90px,230px) minmax(0,1fr) 80px;align-items:center;gap:12px}
+.barre span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.barre .piste{position:relative;height:26px;background:var(--fond);border-radius:6px}
+.barre .rempli{position:absolute;top:0;bottom:0;border-radius:6px}
+.barre .ligne{position:absolute;top:-4px;bottom:-4px;border-left:2px dashed var(--marine)}
+.tableau{max-height:520px;overflow:auto;border:1px solid var(--bord);border-radius:14px;background:#fff}
+table{border-collapse:collapse;width:100%;font-size:1rem}
+th,td{padding:10px 13px;border-bottom:1px solid #EEF2F6;text-align:left;white-space:nowrap}
+th{position:sticky;top:0;background:#F1F5F9;font-weight:700;z-index:1}
+.prog{display:flex;align-items:center;gap:8px}.prog i{display:block;height:10px;border-radius:5px;background:var(--c)}
+.radios{display:flex;flex-direction:column;gap:8px}
+.radios label{display:flex;gap:10px;align-items:center;cursor:pointer}
+.radios input{width:auto;margin:0;accent-color:var(--orange);transform:scale(1.25)}
+.analyse{display:grid;grid-template-columns:240px 1fr;gap:28px}
+.bascule{display:flex;align-items:center;gap:12px;cursor:pointer;font-weight:600}
+.bascule input{width:auto;accent-color:var(--orange);transform:scale(1.4)}
+.lignebtn{display:flex;gap:14px;flex-wrap:wrap;align-items:end;margin:16px 0}
+.lignebtn label{flex:1;min-width:260px}
+@media (max-width:900px){.app{grid-template-columns:minmax(0,1fr)}.resultat,.analyse,.grille2,.grille3{grid-template-columns:1fr}.bandeau h1{font-size:2rem}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside>
+  <h2>📂 Vos commandes</h2>
+  <label class="champ">Fichier CSV ou Excel<input type="file" id="fichier" accept=".csv,.xlsx,.xls"></label>
+  <label class="bascule"><input type="checkbox" id="exemple"> Fichier d'exemple</label>
+  <button class="btn" id="gabarit">⬇️ Gabarit CSV</button>
+  <div id="etatFichier" class="note"></div>
+</aside>
+<main>
+  <div class="bandeau"><div class="ic">📦</div><div><h1>LogiStat</h1><p>Prévoir les retards de livraison · modèle final du bloc 3</p></div></div>
+  <nav class="onglets" role="tablist">
+    <button role="tab" aria-selected="true" data-o="une">🔮 Une commande</button>
+    <button role="tab" aria-selected="false" data-o="fichier">📂 Mes commandes</button>
+    <button role="tab" aria-selected="false" data-o="analyse">📊 Analyse des retards</button>
+  </nav>
+
+  <section id="o-une">
+    <form class="formulaire" id="form">
+      <div class="grille2">
+        <label class="champ">Destination (région ou pays)<select id="destination"></select></label>
+        <label class="champ">Mode d'expédition<select id="mode"></select></label>
+        <label class="champ">Date de la commande<input type="date" id="date" value="2017-11-15" required></label>
+        <label class="champ">Heure (0-23)<input type="number" id="heure" min="0" max="23" step="1" value="14" required></label>
+      </div>
+      <details><summary>Produit (facultatif)</summary><div class="grille3" style="margin-top:14px">
+        <label class="champ">Catégorie<select id="categorie"></select></label>
+        <label class="champ">Quantité<input type="number" id="quantite" min="1" max="5" value="1"></label>
+        <label class="champ">Prix unitaire ($)<input type="number" id="prix" min="1" max="2000" step="0.01" value="59.99"></label>
+      </div></details>
+      <button class="btn primaire" type="submit">🔍 Prédire le retard</button>
+    </form>
+    <div id="resultatUne"></div>
+  </section>
+  <section id="o-fichier" hidden><div id="contenuFichier"></div></section>
+  <section id="o-analyse" hidden><div id="contenuAnalyse"></div></section>
+</main>
+</div>
+
+<script>__PAPAPARSE__</script>
+<script>__MOTEUR__</script>
+<script>
+const M = __MODELE__;
+const ALIAS = __ALIAS__;
+const EXEMPLE = __EXEMPLE__;
+const C = {marine:"#12355B",ambre:"#F29E4C",retard:"#D64550",atemps:"#1B998B"};
+const LIB = {id_commande:"N° de commande",date_commande:"Date",mode_expedition:"Mode d'expédition",region_commande:"Destination",
+  pays_commande:"Pays",heure_commande:"Heure",jour_semaine:"Jour",mois_commande:"Mois",segment_client:"Segment client",
+  categorie:"Catégorie",produit:"Produit",probabilite_retard:"Risque de retard",decision:"Prévision",en_retard:"Retard réel"};
+const JOURS = ["lundi","mardi","mercredi","jeudi","vendredi","samedi","dimanche"];
+const MOIS = ["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
+const ANALYSABLES = ["mode_expedition","region_commande","pays_commande","heure_commande","jour_semaine","mois_commande","categorie","segment_client"];
+const lib = (v) => LIB[v] || v;
+const pct = (x, d = 0) => (100 * x).toFixed(d).replace(".", ",") + " %";
+const nb = (x) => Math.round(x).toLocaleString("fr-CA");
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const lisible = (v, x) => v === "jour_semaine" ? JOURS[x] : v === "mois_commande" ? MOIS[x - 1] : v === "heure_commande" ? `${x} h` : x;
+const moteur = creerMoteur(M, ALIAS);
+const niveau = (p) => p >= M.seuil ? ["Risque élevé", C.retard, "🔴"] : p >= 0.4 ? ["Risque modéré", C.ambre, "🟠"] : ["Risque faible", C.atemps, "🟢"];
+const decision = (p) => (p >= M.seuil ? "en retard" : "à temps");
+const connu = (r) => r.en_retard === true || r.en_retard === false;
+
+function telecharger(nom, texte) {
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob(["﻿" + texte], {type: "text/csv;charset=utf-8"}));
+  a.download = nom; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+}
+const versCSV = (lignes, cols) => [cols.join(",")].concat(lignes.map((r) => cols.map((c) => {
+  const s = String(r[c] ?? ""); return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; }).join(","))).join("\n");
+const cartes = (l) => '<div class="cartes">' + l.map(([a, v, n, c]) =>
+  `<div class="carte" style="--c:${c}"><div class="lib">${esc(a)}</div><div class="val">${esc(v)}</div><div class="nt">${esc(n)}</div></div>`).join("") + "</div>";
+
+document.querySelectorAll(".onglets button").forEach((b) => b.addEventListener("click", () => {
+  document.querySelectorAll(".onglets button").forEach((x) => x.setAttribute("aria-selected", x === b));
+  document.querySelectorAll("main section").forEach((s) => (s.hidden = s.id !== "o-" + b.dataset.o));
+}));
+document.getElementById("gabarit").addEventListener("click", () => {
+  const cols = ["id_commande", "date_commande", ...M.variables.filter((v) => !["heure_commande", "jour_semaine", "mois_commande"].includes(v))];
+  telecharger("logistat_gabarit.csv", cols.join(","));
+});
+
+// ---------- explication d'une commande
+function explication(cmd) {
+  const {probabilite: p, facteurs} = moteur.facteurs(cmd);
+  const [niv, coul, ic] = niveau(p);
+  const imp = facteurs.filter((f) => f.sens !== "effet négligeable").sort((a, b) => Math.abs(b.effet) - Math.abs(a.effet));
+  const max = Math.max(...facteurs.map((f) => Math.abs(f.effet)), 0.01);
+  const val = (f) => f.variable in M.groupes ? String(f.valeur).split(" · ")[0] : lisible(f.variable, f.valeur);
+  const pts = (e) => (e >= 0 ? "+" : "") + (100 * e).toFixed(1).replace(".", ",") + " pts";
+  return `<div class="resultat"><div class="verdict" style="background:${coul}"><div class="t">${ic} ${niv}</div>
+     <div class="g">${pct(p)}</div><div class="x">de risque de retard</div><div class="d">Prévision : <b>${decision(p)}</b></div></div>
+   <div><h4>Ce qui pèse le plus</h4>${imp.length ? "" : "<p>Rien ne s'écarte d'une commande habituelle.</p>"}
+    ${imp.map((f, i) => { const c = f.effet > 0 ? C.retard : C.atemps;
+      return `<div class="facteur"><div class="rang" style="background:${c}">${i + 1}</div><div><div class="nom">${esc(lib(f.variable))}</div>
+      <div class="vl">${esc(val(f))}</div></div><div class="ef" style="color:${c}">${pts(f.effet)}</div></div>`; }).join("")}</div></div>
+   <details><summary>📈 Tous les facteurs</summary><div class="barres">
+    ${facteurs.map((f) => { const l = (Math.abs(f.effet) / max) * 50, c = f.effet > 0 ? C.retard : C.atemps;
+      return `<div class="barre"><span>${esc(lib(f.variable))}</span><div class="piste"><div class="ligne" style="left:50%"></div>
+      <div class="rempli" style="background:${c};left:${f.effet >= 0 ? 50 : 50 - l}%;width:${l}%"></div></div><b style="color:${c}">${pts(f.effet)}</b></div>`; }).join("")}
+   </div></details>`;
+}
+
+// ---------- formulaire
+const regions = M.modalites.region_commande, pays = Object.keys(M.pays_vers_region).sort((a, b) => a.localeCompare(b));
+const opts = (l, choisi) => l.map(([v, t]) => `<option value="${esc(v)}"${v === choisi ? " selected" : ""}>${esc(t)}</option>`).join("");
+document.getElementById("destination").innerHTML =
+  `<optgroup label="Régions">${opts(regions.map((r) => ["r:" + r, "🌍 " + r]), "r:Western Europe")}</optgroup>` +
+  `<optgroup label="Pays">${opts(pays.map((p) => ["p:" + p, `${p}  →  ${M.pays_vers_region[p]}`]))}</optgroup>`;
+document.getElementById("mode").innerHTML = opts(M.modalites.mode_expedition.map((m) => [m, m]), "Standard Class");
+document.getElementById("categorie").innerHTML = opts(M.modalites.categorie.map((m) => [m, m]), M.defauts.categorie);
+document.getElementById("form").addEventListener("submit", (e) => {
+  e.preventDefault();
+  const dest = document.getElementById("destination").value, [a, m, j] = document.getElementById("date").value.split("-").map(Number);
+  const cmd = {
+    mode_expedition: document.getElementById("mode").value,
+    region_commande: dest.startsWith("r:") ? dest.slice(2) : M.pays_vers_region[dest.slice(2)],
+    heure_commande: Number(document.getElementById("heure").value),
+    jour_semaine: (new Date(Date.UTC(a, m - 1, j)).getUTCDay() + 6) % 7,
+    mois_commande: m,
+    categorie: document.getElementById("categorie").value,
+    quantite: Number(document.getElementById("quantite").value),
+    prix_unitaire: Number(document.getElementById("prix").value),
+  };
+  document.getElementById("resultatUne").innerHTML = explication(cmd);
+});
+
+// ---------- fichier de l'utilisateur
+let donnees = null, nomFichier = "";
+async function lireFichier(f) {
+  if (/\.xlsx?$/i.test(f.name)) {
+    if (!window.XLSX) await new Promise((ok, ko) => { const s = document.createElement("script");
+      s.src = "https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"; s.onload = ok;
+      s.onerror = () => ko(new Error("Excel demande une connexion Internet : enregistrez le fichier en CSV.")); document.head.appendChild(s); });
+    const wb = XLSX.read(await f.arrayBuffer(), {cellDates: true});
+    return XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]], {defval: "", raw: true});
+  }
+  const buf = await f.arrayBuffer();
+  let texte = new TextDecoder("utf-8").decode(buf);
+  if (texte.includes("�")) texte = new TextDecoder("latin1").decode(buf);
+  return Papa.parse(texte.replace(/^﻿/, ""), {header: true, skipEmptyLines: true, delimitersToGuess: [",", ";", "\t", "|"]}).data;
+}
+function charger(lignes, nom) {
+  donnees = moteur.normaliser(lignes); nomFichier = nom;
+  document.getElementById("etatFichier").textContent = `${nb(donnees.length)} commandes chargées.`;
+  afficherFichier(); afficherAnalyse();
+}
+document.getElementById("fichier").addEventListener("change", async (e) => {
+  const f = e.target.files[0]; if (!f) return;
+  document.getElementById("exemple").checked = false;
+  try { charger(await lireFichier(f), f.name); }
+  catch (err) { document.getElementById("etatFichier").innerHTML = `<div class="erreur">${esc(err.message)}</div>`; }
+});
+document.getElementById("exemple").addEventListener("change", (e) => {
+  if (e.target.checked) { document.getElementById("fichier").value = ""; charger(Papa.parse(EXEMPLE, {header: true, skipEmptyLines: true}).data, "fichier d'exemple"); }
+  else { donnees = null; document.getElementById("etatFichier").textContent = ""; afficherFichier(); afficherAnalyse(); }
+});
+
+function afficherFichier() {
+  const z = document.getElementById("contenuFichier");
+  if (!donnees) {
+    z.innerHTML = `<div class="info">📂 Importez un fichier à gauche, ou activez le fichier d'exemple.</div>
+      <p><b>Colonnes obligatoires :</b> <code>mode_expedition</code>, <code>region_commande</code> ou <code>pays_commande</code>, <code>date_commande</code></p>`;
+    return;
+  }
+  const manq = moteur.manquantes(donnees);
+  if (manq.length) { z.innerHTML = `<div class="erreur">Colonnes manquantes : ${manq.join(", ")}</div>`; return; }
+  const avert = moteur.controler(donnees);
+  const res = donnees.map((r, i) => { const c = moteur.completer(r), p = moteur.probabilite(c);
+    return {...c, _i: i, probabilite_retard: p, decision: decision(p)}; }).sort((a, b) => b.probabilite_retard - a.probabilite_retard);
+  const n = res.length, risque = res.filter((r) => r.decision === "en retard").length;
+  const card = [["Commandes", nb(n), nomFichier, C.marine], ["Retards prévus", nb(risque), pct(risque / n), C.retard]];
+  const k = res.filter((r) => connu(r) && !r.annulee);
+  // le fichier d'exemple a pu servir à l'entraînement : pas de score sur lui
+  if (k.length && nomFichier !== "fichier d'exemple") card.push(["Prévisions justes", pct(k.filter((r) => (r.decision === "en retard") === r.en_retard).length / k.length), `sur ${nb(k.length)} connues`, C.atemps]);
+  const cols = [...["id_commande", "date_commande", "pays_commande"].filter((c) => res.some((r) => c in r)), "mode_expedition", "region_commande", "probabilite_retard", "decision", ...(res.some(connu) ? ["en_retard"] : [])];
+  const montre = res.slice(0, 1000);
+  z.innerHTML = (avert.length ? `<div class="alerte"><ul style="margin:0;padding-left:20px">${avert.map((m) => `<li>${esc(m)}</li>`).join("")}</ul></div>` : "")
+   + cartes(card) + `<div class="tableau"><table><thead><tr>${cols.map((c) => `<th>${esc(lib(c))}</th>`).join("")}</tr></thead><tbody>
+   ${montre.map((r) => "<tr>" + cols.map((c) => {
+      if (c === "probabilite_retard") return `<td><div class="prog" style="--c:${niveau(r[c])[1]}"><i style="width:${Math.round(80 * r[c])}px"></i>${pct(r[c])}</div></td>`;
+      if (c === "en_retard") return `<td>${r[c] === true ? "en retard" : r[c] === false ? "à temps" : ""}</td>`;
+      return `<td>${esc(r[c])}</td>`; }).join("") + "</tr>").join("")}</tbody></table></div>
+   <div class="lignebtn"><button class="btn" id="telechargerPred">⬇️ Télécharger (CSV)</button>
+   <label class="champ">Pourquoi cette commande ?<select id="choixCommande">${montre.map((r, j) =>
+     `<option value="${j}">${esc(r.id_commande ?? "ligne " + (r._i + 1))} — ${pct(r.probabilite_retard)}</option>`).join("")}</select></label></div>
+   <div id="explicationFichier"></div>`;
+  document.getElementById("telechargerPred").onclick = () =>
+    telecharger("logistat_predictions.csv", versCSV(res.map((r) => ({...r, probabilite_retard: r.probabilite_retard.toFixed(4)})), cols));
+  const sel = document.getElementById("choixCommande");
+  const montrer = () => (document.getElementById("explicationFichier").innerHTML = explication(montre[sel.value]));
+  sel.onchange = montrer; montrer();
+}
+
+function afficherAnalyse() {
+  const z = document.getElementById("contenuAnalyse");
+  if (!donnees) { z.innerHTML = '<div class="info">📂 Importez un fichier à gauche.</div>'; return; }
+  if (!donnees.some(connu)) { z.innerHTML = '<div class="alerte">Il faut une colonne en_retard (1 = en retard, 0 = à temps).</div>'; return; }
+  const liv = donnees.filter((r) => connu(r) && !r.annulee);
+  const taux = liv.filter((r) => r.en_retard).length / liv.length;
+  const dispo = ANALYSABLES.filter((v) => donnees.some((r) => v in r));
+  z.innerHTML = cartes([["Commandes", nb(donnees.length), nomFichier, C.marine], ["Taux de retard", pct(taux, 1), "réel", C.retard]])
+    + `<div class="analyse"><div><b>Comparer selon</b><div class="radios" id="radios">${dispo.map((v, i) =>
+    `<label><input type="radio" name="facteur" value="${v}" ${i ? "" : "checked"}> ${lib(v)}</label>`).join("")}</div></div><div id="graphAnalyse"></div></div>`;
+  const tracer = (v) => {
+    const g = new Map(); liv.forEach((r) => { const k = String(r[v] ?? "(vide)"); const o = g.get(k) || [0, 0]; o[0]++; if (r.en_retard) o[1]++; g.set(k, o); });
+    const t = [...g].map(([k, [n, l]]) => ({k, n, t: l / n})).sort((a, b) => b.t - a.t).slice(0, 20);
+    document.getElementById("graphAnalyse").innerHTML = `<div class="barres">${t.map((r) => { const c = r.t > taux ? C.retard : C.atemps;
+      return `<div class="barre"><span title="${esc(r.k)}">${esc(lisible(v, r.k))} <small style="color:#5B6B7B">(${nb(r.n)})</small></span><div class="piste">
+      <div class="rempli" style="background:${c};left:0;width:${100 * r.t}%"></div><div class="ligne" style="left:${100 * taux}%"></div></div><b style="color:${c}">${pct(r.t)}</b></div>`; }).join("")}</div>`;
+  };
+  document.querySelectorAll("#radios input").forEach((r) => (r.onchange = () => tracer(r.value)));
+  tracer(dispo[0]);
+}
+afficherFichier(); afficherAnalyse();
+</script>
+</body>
+</html>
