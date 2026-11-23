@@ -1,0 +1,201 @@
+id_commande,date_commande,mode_expedition,region_commande,pays_commande,segment_client,categorie,departement,quantite,prix_unitaire,taux_remise,en_retard
+338,2015-01-05 22:03:00,Standard Class,South America,Argentina,Corporate,Cardio Equipment,Footwear,4,99.99,0.1,0
+1152,2015-01-17 19:14:00,Standard Class,Caribbean,República Dominicana,Corporate,Camping & Hiking,Fan Shop,1,299.98,0.17,0
+2120,2015-01-31 22:22:00,Second Class,South America,Brasil,Corporate,Cardio Equipment,Footwear,5,99.99,0.02,1
+2226,2015-02-02 11:31:00,Standard Class,Caribbean,Cuba,Home Office,Water Sports,Fan Shop,1,199.99,0.07,0
+2320,2015-02-03 20:26:00,Second Class,South America,Argentina,Home Office,Cardio Equipment,Footwear,3,99.99,0.02,1
+3779,2015-02-25 03:36:00,Standard Class,South America,Chile,Home Office,Indoor/Outdoor Games,Fan Shop,1,49.98,0.25,1
+4765,2015-03-11 13:02:00,Standard Class,Central America,México,Corporate,Cardio Equipment,Footwear,5,99.99,0.2,1
+4860,2015-03-12 22:19:00,Standard Class,Central America,Guatemala,Consumer,Water Sports,Fan Shop,1,199.99,0.01,1
+4953,2015-03-14 06:54:00,Standard Class,Caribbean,Cuba,Corporate,Men's Footwear,Apparel,1,129.99,0.13,0
+5343,2015-03-19 23:32:00,First Class,Central America,México,Home Office,Men's Footwear,Apparel,1,129.99,0.25,1
+5700,2015-03-25 04:36:00,Standard Class,Central America,México,Home Office,Indoor/Outdoor Games,Fan Shop,2,49.98,0.12,1
+6202,2015-04-01 12:29:00,Standard Class,Central America,México,Consumer,Cleats,Apparel,3,59.99,0.01,0
+6454,2015-04-05 04:46:00,Standard Class,South America,Colombia,Corporate,Women's Apparel,Golf,5,50.0,0.18,1
+6979,2015-04-12 20:42:00,Standard Class,Central America,México,Corporate,Fishing,Fan Shop,1,399.98,0.12,1
+7279,2015-04-17 05:48:00,Same Day,Caribbean,Martinica,Home Office,Accessories,Outdoors,2,24.99,0.2,0
+7345,2015-04-18 04:55:00,Second Class,Central America,Honduras,Home Office,Cleats,Apparel,3,59.99,0.18,1
+7459,2015-04-19 20:52:00,Standard Class,Central America,México,Consumer,Women's Apparel,Golf,3,50.0,0.12,1
+8127,2015-04-29 14:53:00,Standard Class,Central America,El Salvador,Consumer,Cardio Equipment,Footwear,5,99.99,0.25,0
+8496,2015-05-05 00:10:00,Standard Class,Caribbean,República Dominicana,Home Office,Camping & Hiking,Fan Shop,1,299.98,0.15,0
+8573,2015-05-06 03:09:00,Standard Class,Central America,México,Consumer,Indoor/Outdoor Games,Fan Shop,2,49.98,0.25,0
+8766,2015-05-08 22:46:00,Second Class,South America,Brasil,Consumer,Water Sports,Fan Shop,1,199.99,0.1,0
+9076,2015-05-13 11:22:00,Standard Class,Central America,México,Corporate,Cleats,Apparel,4,59.99,0.03,0
+9099,2015-05-13 19:26:00,Standard Class,Central America,México,Corporate,Women's Apparel,Golf,1,50.0,0.0,1
+9154,2015-05-14 14:42:00,Same Day,Central America,El Salvador,Corporate,Cardio Equipment,Footwear,4,99.99,0.06,1
+9818,2015-05-24 07:19:00,Standard Class,Central America,México,Consumer,Water Sports,Fan Shop,1,199.99,0.25,0
+10736,2015-06-06 16:56:00,Standard Class,Western Europe,Francia,Corporate,Fishing,Fan Shop,1,399.98,0.25,0
+10745,2015-06-06 20:06:00,Same Day,Western Europe,Francia,Consumer,Fishing,Fan Shop,1,399.98,0.17,1
+10951,2015-06-09 20:16:00,First Class,Northern Europe,Reino Unido,Consumer,Cleats,Apparel,2,59.99,0.17,1
+11500,2015-06-17 20:36:00,First Class,Northern Europe,Noruega,Consumer,Water Sports,Fan Shop,1,199.99,0.07,1
+11559,2015-06-18 17:16:00,Standard Class,Northern Europe,Reino Unido,Consumer,Cleats,Apparel,5,59.99,0.1,1
+11968,2015-06-24 16:34:00,Standard Class,Western Europe,Alemania,Consumer,Fishing,Fan Shop,1,399.98,0.12,0
+12531,2015-07-02 21:49:00,Standard Class,Western Europe,Alemania,Consumer,Women's Apparel,Golf,1,50.0,0.16,0
+12660,2015-07-04 19:00:00,First Class,Western Europe,Alemania,Home Office,Cardio Equipment,Footwear,4,99.99,0.1,1
+13033,2015-07-10 05:41:00,Second Class,Western Europe,Alemania,Consumer,Camping & Hiking,Fan Shop,1,299.98,0.2,1
+13066,2015-07-10 17:15:00,Standard Class,Western Europe,Francia,Home Office,Camping & Hiking,Fan Shop,1,299.98,0.15,0
+13524,2015-07-17 09:42:00,First Class,Western Europe,Alemania,Consumer,Men's Footwear,Apparel,1,129.99,0.17,1
+14130,2015-07-26 06:01:00,Second Class,Western Europe,Francia,Home Office,Camping & Hiking,Fan Shop,1,299.98,0.13,1
+14501,2015-07-31 15:59:00,Standard Class,Northern Europe,Reino Unido,Corporate,Indoor/Outdoor Games,Fan Shop,4,49.98,0.03,0
+14813,2015-08-05 05:18:00,First Class,Southern Europe,España,Home Office,Cleats,Apparel,4,59.99,0.15,1
+15255,2015-08-11 16:09:00,Second Class,Western Europe,Alemania,Corporate,Women's Apparel,Golf,4,50.0,0.04,1
+15715,2015-08-18 09:18:00,Standard Class,Northern Europe,Suecia,Corporate,Cleats,Apparel,4,59.99,0.2,1
+16456,2015-08-29 04:55:00,Standard Class,Southern Europe,España,Consumer,Men's Footwear,Apparel,1,129.99,0.0,0
+16797,2015-09-03 04:23:00,Standard Class,Southern Europe,Italia,Consumer,Shop By Sport,Golf,4,30.0,0.16,0
+16880,2015-09-04 09:27:00,First Class,Western Europe,Francia,Home Office,Men's Footwear,Apparel,1,129.99,0.12,1
+16938,2015-09-05 05:47:00,First Class,Northern Europe,Suecia,Corporate,Indoor/Outdoor Games,Fan Shop,2,49.98,0.17,1
+16976,2015-09-05 19:05:00,First Class,Northern Europe,Reino Unido,Corporate,Fishing,Fan Shop,1,399.98,0.07,1
+17037,2015-09-06 16:28:00,Standard Class,Western Europe,Alemania,Home Office,Fitness Accessories,Footwear,2,34.99,0.17,0
+17057,2015-09-06 23:28:00,Standard Class,Western Europe,Alemania,Consumer,Cleats,Apparel,4,59.99,0.05,0
+17161,2015-09-08 11:54:00,Second Class,Northern Europe,Reino Unido,Corporate,Water Sports,Fan Shop,1,199.99,0.18,0
+17788,2015-09-17 15:34:00,Standard Class,Western Europe,Alemania,Home Office,Men's Footwear,Apparel,1,129.99,0.2,0
+17907,2015-09-19 09:16:00,Standard Class,Western Europe,Alemania,Consumer,Water Sports,Fan Shop,1,199.99,0.0,0
+19427,2015-10-11 13:47:00,Standard Class,Southern Europe,España,Consumer,Cardio Equipment,Footwear,3,99.99,0.18,0
+19614,2015-10-14 07:18:00,First Class,Southern Europe,Italia,Home Office,Cardio Equipment,Footwear,4,99.99,0.0,1
+19691,2015-10-15 10:17:00,Standard Class,Western Europe,Alemania,Consumer,Fishing,Fan Shop,1,399.98,0.25,0
+20075,2015-10-21 00:48:00,Standard Class,Western Europe,Francia,Consumer,Indoor/Outdoor Games,Fan Shop,4,49.98,0.06,1
+21825,2015-11-15 13:55:00,Standard Class,Southeast Asia,Indonesia,Consumer,Indoor/Outdoor Games,Fan Shop,3,49.98,0.09,1
+21866,2015-11-16 04:17:00,Standard Class,Southeast Asia,Vietnam,Consumer,Camping & Hiking,Fan Shop,1,299.98,0.0,0
+22082,2015-11-19 07:57:00,Standard Class,South Asia,India,Consumer,Women's Apparel,Golf,1,50.0,0.13,0
+22126,2015-11-19 23:22:00,First Class,Southeast Asia,Indonesia,Corporate,Cleats,Apparel,4,59.99,0.2,1
+22562,2015-11-26 08:07:00,Standard Class,Southeast Asia,Indonesia,Corporate,Camping & Hiking,Fan Shop,1,299.98,0.2,0
+22629,2015-11-27 07:35:00,Same Day,Eastern Asia,Hong Kong,Consumer,Water Sports,Fan Shop,1,199.99,0.06,0
+22974,2015-12-02 08:27:00,First Class,Oceania,Australia,Consumer,Cardio Equipment,Footwear,1,99.99,0.0,1
+23076,2015-12-03 20:12:00,Second Class,Eastern Asia,Corea del Sur,Corporate,Water Sports,Fan Shop,1,199.99,0.0,0
+23632,2015-12-11 22:59:00,First Class,Eastern Asia,China,Corporate,Women's Apparel,Golf,2,50.0,0.09,1
+25261,2016-01-04 17:42:00,Standard Class,Southeast Asia,Malasia,Consumer,Indoor/Outdoor Games,Fan Shop,2,49.98,0.15,0
+25563,2016-01-09 03:30:00,Standard Class,Oceania,Australia,Consumer,Water Sports,Fan Shop,1,199.99,0.16,0
+25570,2016-01-09 05:57:00,Standard Class,South Asia,India,Home Office,Women's Apparel,Golf,2,50.0,0.07,1
+25703,2016-01-11 04:33:00,Standard Class,South Asia,Pakistán,Corporate,Fishing,Fan Shop,1,399.98,0.04,0
+26001,2016-01-15 12:57:00,Standard Class,South Asia,Pakistán,Consumer,Cleats,Apparel,1,59.99,0.25,0
+26065,2016-01-16 11:22:00,First Class,Eastern Asia,Japón,Consumer,Cardio Equipment,Footwear,2,99.99,0.25,1
+26145,2016-01-17 15:24:00,Same Day,Eastern Asia,China,Corporate,Cleats,Apparel,2,59.99,0.07,1
+26586,2016-01-24 01:54:00,First Class,Eastern Asia,China,Home Office,Indoor/Outdoor Games,Fan Shop,2,49.98,0.01,1
+26868,2016-01-28 04:42:00,Standard Class,Oceania,Australia,Consumer,Women's Apparel,Golf,3,50.0,0.18,0
+27258,2016-02-02 21:20:00,Standard Class,Eastern Asia,China,Corporate,Water Sports,Fan Shop,1,199.99,0.05,0
+27725,2016-02-09 16:57:00,Standard Class,Oceania,Australia,Consumer,Cardio Equipment,Footwear,2,99.99,0.13,1
+28127,2016-02-15 13:47:00,Standard Class,Oceania,Australia,Consumer,Men's Footwear,Apparel,1,129.99,0.18,0
+29267,2016-03-03 05:11:00,Standard Class,Southeast Asia,Tailandia,Consumer,Trade-In,Outdoors,4,15.99,0.09,0
+29552,2016-03-07 09:01:00,Standard Class,Southeast Asia,Indonesia,Corporate,Water Sports,Fan Shop,1,199.99,0.07,0
+29778,2016-03-10 16:12:00,Standard Class,Southeast Asia,Indonesia,Corporate,Camping & Hiking,Fan Shop,1,299.98,0.25,0
+29887,2016-03-12 06:23:00,Standard Class,Oceania,Australia,Home Office,Indoor/Outdoor Games,Fan Shop,3,49.98,0.12,0
+30172,2016-03-16 10:14:00,Standard Class,Oceania,Australia,Corporate,Shop By Sport,Golf,5,39.99,0.09,0
+31177,2016-03-31 02:20:00,Standard Class,Oceania,Australia,Consumer,Cleats,Apparel,3,59.99,0.03,0
+31181,2016-03-31 03:44:00,Standard Class,Oceania,Nueva Zelanda,Consumer,Fishing,Fan Shop,1,399.98,0.16,0
+31353,2016-04-02 16:00:00,Standard Class,East of USA,Estados Unidos,Consumer,Shop By Sport,Golf,5,39.99,0.03,0
+31516,2016-04-05 01:06:00,Standard Class,East of USA,Estados Unidos,Corporate,Fishing,Fan Shop,1,399.98,0.17,0
+31636,2016-04-06 19:08:00,Standard Class,West of USA,Estados Unidos,Consumer,Cardio Equipment,Footwear,4,99.99,0.07,0
+31653,2016-04-07 01:06:00,Standard Class,East of USA,Estados Unidos,Consumer,Indoor/Outdoor Games,Fan Shop,5,49.98,0.02,0
+31861,2016-04-10 01:58:00,Standard Class,West of USA,Estados Unidos,Corporate,Indoor/Outdoor Games,Fan Shop,5,49.98,0.17,0
+32214,2016-04-15 05:38:00,Standard Class,US Center,Estados Unidos,Consumer,Camping & Hiking,Fan Shop,1,299.98,0.09,1
+33406,2016-05-02 15:15:00,Standard Class,West of USA,Estados Unidos,Corporate,Women's Apparel,Golf,1,50.0,0.1,0
+33492,2016-05-03 21:23:00,Standard Class,West of USA,Estados Unidos,Corporate,Indoor/Outdoor Games,Fan Shop,3,49.98,0.03,0
+33573,2016-05-05 01:46:00,Standard Class,South of USA,Estados Unidos,Corporate,Indoor/Outdoor Games,Fan Shop,3,49.98,0.25,0
+33600,2016-05-05 11:13:00,Same Day,South of USA,Estados Unidos,Consumer,Indoor/Outdoor Games,Fan Shop,4,49.98,0.25,0
+34881,2016-05-24 04:01:00,First Class,US Center,Estados Unidos,Home Office,Men's Footwear,Apparel,1,129.99,0.03,1
+35266,2016-05-29 18:54:00,Standard Class,US Center,Estados Unidos,Consumer,Cleats,Apparel,5,59.99,0.15,0
+35468,2016-06-01 17:40:00,First Class,West of USA,Estados Unidos,Corporate,Indoor/Outdoor Games,Fan Shop,2,49.98,0.03,1
+35983,2016-06-09 06:05:00,Standard Class,East of USA,Estados Unidos,Home Office,Hockey,Fitness,5,25.0,0.09,0
+36366,2016-06-14 20:16:00,Standard Class,US Center,Estados Unidos,Consumer,Fishing,Fan Shop,1,399.98,0.09,0
+36828,2016-06-21 14:08:00,First Class,South of USA,Estados Unidos,Corporate,Men's Footwear,Apparel,1,129.99,0.17,1
+37353,2016-06-29 06:04:00,Standard Class,US Center,Estados Unidos,Corporate,Cleats,Apparel,2,59.99,0.0,0
+37407,2016-06-30 00:59:00,Standard Class,East of USA,Estados Unidos,Home Office,Fishing,Fan Shop,1,399.98,0.17,0
+37545,2016-07-02 01:20:00,First Class,US Center,Estados Unidos,Consumer,Cleats,Apparel,5,59.99,0.2,1
+38576,2016-07-17 02:32:00,Standard Class,West of USA,Estados Unidos,Consumer,Accessories,Outdoors,4,24.99,0.09,0
+38796,2016-07-20 07:36:00,Standard Class,West of USA,Estados Unidos,Consumer,Indoor/Outdoor Games,Fan Shop,2,49.98,0.13,0
+39061,2016-07-24 04:27:00,Second Class,East of USA,Estados Unidos,Home Office,Fishing,Fan Shop,1,399.98,0.15,0
+39346,2016-07-28 08:18:00,Standard Class,East of USA,Estados Unidos,Consumer,Fishing,Fan Shop,1,399.98,0.06,0
+40161,2016-08-09 05:50:00,Standard Class,East of USA,Estados Unidos,Consumer,Electronics,Footwear,1,44.99,0.1,0
+40208,2016-08-09 22:18:00,Standard Class,South of USA,Estados Unidos,Consumer,Men's Footwear,Apparel,1,129.99,0.18,0
+40253,2016-08-10 14:04:00,Same Day,South of USA,Estados Unidos,Consumer,Shop By Sport,Golf,4,39.99,0.01,1
+40391,2016-08-12 14:24:00,First Class,US Center,Estados Unidos,Corporate,Women's Apparel,Golf,4,50.0,0.25,1
+41545,2016-08-29 10:42:00,Standard Class,Southern Africa,SudAfrica,Consumer,Camping & Hiking,Fan Shop,1,299.98,0.1,1
+44359,2016-10-09 12:34:00,Second Class,West Asia,Turquía,Corporate,Women's Apparel,Golf,5,50.0,0.25,1
+45801,2016-10-30 13:46:00,Standard Class,West Asia,Arabia Saudí,Corporate,Cleats,Apparel,3,59.99,0.2,0
+46141,2016-11-04 12:53:00,Second Class,West Asia,Turquía,Consumer,Fishing,Fan Shop,1,399.98,0.12,0
+46224,2016-11-05 17:58:00,Second Class,Eastern Europe,Rusia,Consumer,Cleats,Apparel,1,59.99,0.01,1
+48112,2016-12-03 07:25:00,Standard Class,West Asia,Turquía,Corporate,Indoor/Outdoor Games,Fan Shop,3,49.98,0.17,0
+49025,2016-12-16 15:17:00,Standard Class,Eastern Europe,Moldavia,Corporate,Accessories,Outdoors,5,24.99,0.03,1
+49570,2016-12-24 14:13:00,Standard Class,West Africa,Nigeria,Consumer,Women's Apparel,Golf,1,50.0,0.03,1
+49733,2016-12-26 23:20:00,Standard Class,Eastern Europe,Polonia,Consumer,Cardio Equipment,Footwear,4,99.99,0.05,0
+50218,2017-01-03 01:15:00,Standard Class,South Asia,Irán,Corporate,Cleats,Apparel,4,59.99,0.02,0
+50279,2017-01-03 22:37:00,First Class,West Asia,Irak,Consumer,Men's Footwear,Apparel,1,129.99,0.15,1
+50556,2017-01-07 23:40:00,Second Class,Eastern Europe,Rusia,Consumer,Camping & Hiking,Fan Shop,1,299.98,0.04,0
+50762,2017-01-10 23:50:00,Second Class,North Africa,Argelia,Corporate,Indoor/Outdoor Games,Fan Shop,3,49.98,0.07,1
+50923,2017-01-13 08:14:00,Standard Class,West Asia,Turquía,Corporate,Indoor/Outdoor Games,Fan Shop,3,49.98,0.15,0
+50937,2017-01-13 13:08:00,Second Class,East Africa,Tanzania,Consumer,Fishing,Fan Shop,1,399.98,0.03,1
+51418,2017-01-20 13:39:00,Standard Class,South America,Brasil,Consumer,Cleats,Apparel,5,59.99,0.05,0
+52384,2017-02-03 16:05:00,Standard Class,South America,Chile,Home Office,Men's Footwear,Apparel,1,129.99,0.05,1
+52842,2017-02-10 08:33:00,Same Day,Central America,Nicaragua,Consumer,Shop By Sport,Golf,1,39.99,0.18,0
+53979,2017-02-26 22:53:00,First Class,South America,Colombia,Corporate,Camping & Hiking,Fan Shop,1,299.98,0.2,1
+54016,2017-02-27 11:51:00,Standard Class,Central America,México,Consumer,Cardio Equipment,Footwear,5,99.99,0.18,0
+54381,2017-03-04 19:44:00,Second Class,Central America,México,Corporate,Cleats,Apparel,4,59.99,0.1,0
+54889,2017-03-12 05:42:00,Standard Class,Caribbean,República Dominicana,Corporate,Men's Footwear,Apparel,1,129.99,0.07,1
+54926,2017-03-12 18:40:00,Standard Class,Caribbean,República Dominicana,Corporate,Women's Apparel,Golf,3,50.0,0.17,0
+55554,2017-03-21 22:41:00,Standard Class,Central America,México,Corporate,Water Sports,Fan Shop,1,199.99,0.0,1
+55642,2017-03-23 05:31:00,Standard Class,Central America,México,Consumer,Indoor/Outdoor Games,Fan Shop,2,49.98,0.1,0
+55682,2017-03-23 19:32:00,Standard Class,Central America,Honduras,Consumer,Women's Apparel,Golf,1,50.0,0.07,0
+56305,2017-04-01 21:47:00,Standard Class,Central America,El Salvador,Corporate,Cardio Equipment,Footwear,4,99.99,0.04,1
+56308,2017-04-01 22:51:00,Standard Class,Central America,Panamá,Home Office,Camping & Hiking,Fan Shop,1,299.98,0.03,0
+56561,2017-04-05 15:29:00,Same Day,South America,Brasil,Home Office,Women's Apparel,Golf,5,50.0,0.2,1
+56985,2017-04-11 20:02:00,Second Class,Central America,Honduras,Consumer,Shop By Sport,Golf,3,39.99,0.16,1
+57830,2017-04-24 04:04:00,Standard Class,South America,Brasil,Consumer,Fishing,Fan Shop,1,399.98,0.13,1
+58219,2017-04-29 20:21:00,Standard Class,Central America,El Salvador,Home Office,Men's Footwear,Apparel,1,129.99,0.13,1
+58337,2017-05-01 13:41:00,Standard Class,Central America,México,Corporate,Golf Shoes,Outdoors,4,80.0,0.1,0
+58394,2017-05-02 09:40:00,First Class,South America,Brasil,Corporate,Indoor/Outdoor Games,Fan Shop,5,49.98,0.07,1
+60293,2017-05-30 02:58:00,Standard Class,Central America,México,Home Office,Cleats,Apparel,5,59.99,0.18,0
+60359,2017-05-31 02:05:00,Standard Class,Central America,México,Corporate,Baseball & Softball,Fitness,1,159.99,0.15,1
+60409,2017-05-31 19:36:00,Same Day,South America,Brasil,Consumer,Camping & Hiking,Fan Shop,1,299.98,0.17,1
+61296,2017-06-13 18:22:00,Standard Class,South America,Brasil,Home Office,Strength Training,Footwear,1,189.0,0.01,0
+62172,2017-06-26 13:16:00,Standard Class,Western Europe,Alemania,Corporate,Water Sports,Fan Shop,1,199.99,0.05,0
+62570,2017-07-02 08:42:00,Second Class,Southern Europe,España,Corporate,Men's Footwear,Apparel,1,129.99,0.13,1
+63167,2017-07-11 01:51:00,Standard Class,Northern Europe,Reino Unido,Consumer,Men's Footwear,Apparel,1,129.99,0.02,0
+63754,2017-07-19 15:30:00,Second Class,Western Europe,Francia,Consumer,Cleats,Apparel,3,59.99,0.0,1
+63877,2017-07-21 10:36:00,Standard Class,Northern Europe,Reino Unido,Consumer,Men's Footwear,Apparel,1,129.99,0.25,0
+64479,2017-07-30 05:30:00,Standard Class,Western Europe,Alemania,Consumer,Fishing,Fan Shop,1,399.98,0.03,1
+64583,2017-07-31 17:57:00,First Class,Northern Europe,Reino Unido,Corporate,Indoor/Outdoor Games,Fan Shop,2,49.98,0.06,1
+64677,2017-08-02 02:53:00,Standard Class,Southern Europe,España,Consumer,Cleats,Apparel,5,59.99,0.02,0
+65080,2017-08-08 00:04:00,Second Class,Western Europe,Francia,Consumer,Men's Footwear,Apparel,1,129.99,0.06,1
+65211,2017-08-09 21:58:00,Standard Class,Southern Europe,España,Consumer,Cleats,Apparel,4,59.99,0.17,0
+65794,2017-08-18 10:13:00,First Class,Western Europe,Austria,Consumer,Men's Footwear,Apparel,1,129.99,0.06,1
+65964,2017-08-20 21:46:00,Standard Class,Western Europe,Francia,Consumer,Women's Apparel,Golf,3,50.0,0.0,1
+66089,2017-08-22 17:34:00,Second Class,Western Europe,Francia,Consumer,Strength Training,Footwear,1,189.0,0.2,1
+66766,2017-09-01 14:45:00,Second Class,Western Europe,Francia,Consumer,Fishing,Fan Shop,1,399.98,0.04,0
+66997,2017-09-04 23:40:00,Standard Class,Southern Europe,Italia,Corporate,Camping & Hiking,Fan Shop,1,299.98,0.06,0
+69181,2017-10-06 20:50:00,Standard Class,Western Europe,Bélgica,Home Office,Books,Book Shop,1,31.08,0.06,0
+69624,2017-10-13 08:02:00,First Class,Western Europe,Países Bajos,Consumer,Cameras,Technology,1,452.04,0.09,1
+69786,2017-10-15 16:47:00,First Class,Northern Europe,Reino Unido,Consumer,Cameras,Technology,1,452.04,0.09,1
+69806,2017-10-15 23:48:00,Standard Class,Western Europe,Francia,Consumer,Cameras,Technology,1,452.04,0.06,0
+69882,2017-10-17 02:25:00,First Class,Northern Europe,Reino Unido,Home Office,Cameras,Technology,1,452.04,0.02,1
+69941,2017-10-17 23:05:00,Standard Class,Western Europe,Austria,Home Office,Cameras,Technology,1,452.04,0.18,0
+70250,2017-10-22 11:21:00,Standard Class,Western Europe,Francia,Consumer,Children's Clothing,Apparel,1,357.1,0.04,1
+71095,2017-11-03 19:23:00,Standard Class,Northern Europe,Reino Unido,Consumer,Consumer Electronics,Technology,1,252.88,0.0,1
+71200,2017-11-05 08:10:00,Standard Class,Northern Europe,Noruega,Corporate,Crafts,Apparel,1,461.48,0.0,1
+72026,2017-11-17 09:33:00,First Class,Oceania,Australia,Consumer,Garden,Outdoors,1,532.58,0.17,1
+72034,2017-11-17 12:22:00,Second Class,Eastern Asia,China,Consumer,Garden,Outdoors,1,532.58,0.06,1
+72193,2017-11-19 20:04:00,Standard Class,Oceania,Australia,Consumer,Health and Beauty,Health and Beauty,1,293.04,0.1,0
+72342,2017-11-22 00:16:00,Standard Class,Eastern Asia,China,Consumer,Health and Beauty,Health and Beauty,1,293.04,0.04,0
+72667,2017-11-26 18:08:00,Same Day,South Asia,India,Corporate,Music,Discs Shop,1,260.65,0.04,1
+72977,2017-12-01 06:44:00,Standard Class,Southeast Asia,Singapur,Corporate,Pet Supplies,Pet Shop,1,84.4,0.1,0
+73093,2017-12-02 23:23:00,Standard Class,Eastern Asia,China,Consumer,Sporting Goods,Fitness,1,327.75,0.02,0
+73136,2017-12-03 14:26:00,Standard Class,Southeast Asia,Indonesia,Consumer,Sporting Goods,Fitness,1,327.75,0.16,0
+73199,2017-12-04 12:31:00,Standard Class,Eastern Asia,Mongolia,Home Office,Sporting Goods,Fitness,1,327.75,0.04,1
+73215,2017-12-04 18:07:00,Standard Class,South Asia,India,Consumer,Sporting Goods,Fitness,1,327.75,0.06,1
+73513,2017-12-09 02:31:00,Standard Class,Southeast Asia,Indonesia,Home Office,Video Games,Discs Shop,1,39.75,0.25,0
+73698,2017-12-11 19:20:00,Second Class,South Asia,Bangladés,Consumer,Video Games,Discs Shop,1,39.75,0.15,1
+73739,2017-12-12 09:42:00,Standard Class,Southeast Asia,Filipinas,Home Office,Women's Clothing,Apparel,1,215.82,0.25,1
+74258,2017-12-19 23:32:00,Standard Class,Southeast Asia,Filipinas,Consumer,CDs,Discs Shop,1,11.29,0.1,0
+74260,2017-12-20 00:14:00,Standard Class,South Asia,India,Consumer,CDs,Discs Shop,1,11.29,0.07,1
+74399,2017-12-22 00:56:00,Standard Class,Eastern Asia,China,Corporate,Children's Clothing,Apparel,1,357.1,0.1,1
+74522,2017-12-23 20:01:00,Standard Class,Southeast Asia,Tailandia,Consumer,Computers,Technology,1,1500.0,0.09,0
+74829,2017-12-28 07:34:00,Standard Class,Southeast Asia,Filipinas,Home Office,Crafts,Apparel,1,461.48,0.1,1
+75177,2018-01-02 09:30:00,Standard Class,Southeast Asia,Filipinas,Consumer,Garden,Outdoors,1,532.58,0.07,0
+75674,2018-01-09 15:37:00,Standard Class,Oceania,Australia,Consumer,Pet Supplies,Pet Shop,1,84.4,0.06,1
+75872,2018-01-12 12:59:00,Standard Class,South Asia,India,Consumer,Sporting Goods,Fitness,1,327.75,0.0,0
+75893,2018-01-12 20:20:00,Standard Class,Eastern Asia,China,Corporate,Sporting Goods,Fitness,1,327.75,0.18,0
+76186,2018-01-17 02:59:00,First Class,Southeast Asia,Tailandia,Consumer,Toys,Fan Shop,1,11.54,0.25,1
+76438,2018-01-20 19:17:00,Same Day,Eastern Asia,China,Consumer,Video Games,Discs Shop,1,39.75,0.0,1
+76585,2018-01-22 22:47:00,Standard Class,Eastern Asia,China,Corporate,Video Games,Discs Shop,1,39.75,0.18,1
+76657,2018-01-24 00:00:00,Second Class,Oceania,Australia,Consumer,Video Games,Discs Shop,1,39.75,0.18,1
+76835,2018-01-26 14:22:00,Standard Class,South Asia,India,Home Office,Women's Clothing,Apparel,1,215.82,0.04,1
+77098,2018-01-30 10:30:00,Standard Class,Southeast Asia,Indonesia,Consumer,Women's Clothing,Apparel,1,215.82,0.13,0
