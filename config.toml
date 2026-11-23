@@ -1,0 +1,14 @@
+[theme]
+base = "light"
+primaryColor = "#E8833A"            # ambre : boutons, onglet actif, curseurs
+backgroundColor = "#F6F8FB"
+secondaryBackgroundColor = "#E9EFF6" # barre latérale, champs
+textColor = "#1C2B39"
+font = "sans serif"
+
+[server]
+headless = false
+runOnSave = true
+
+[browser]
+gatherUsageStats = false
